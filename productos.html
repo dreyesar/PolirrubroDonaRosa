@@ -60,6 +60,15 @@
       <button class="closeCart" onclick="toggleCart(false)">✖️</button>
     </div>
     <div id="cartItems" class="cart-items"></div>
+
+    <!-- 🔹 BLOQUE NUEVO: Formas de pago -->
+    <div class="cart-pago">
+      <h3>Forma de pago</h3>
+      <label><input type="radio" name="pago" value="Efectivo" checked> Efectivo</label>
+      <label><input type="radio" name="pago" value="Débito"> Débito</label>
+      <label><input type="radio" name="pago" value="Mercado Pago"> Mercado Pago</label>
+    </div>
+
     <div class="cart-footer">
       <div class="cart-total">
         <b>Total:</b> <span id="cartTotal">$0</span>

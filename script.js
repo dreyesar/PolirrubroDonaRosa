@@ -84,6 +84,9 @@ function renderProductos(lista){
   });
 }
 
+/* ================================
+   CANTIDADES
+=================================*/
 function changeQty(id,delta){
   const input=document.getElementById("qty-"+id);
   if(!input) return;
@@ -101,34 +104,53 @@ function refreshCartBadge(){
   document.getElementById("items").textContent=items;
   document.getElementById("total").textContent="$"+formatARS(total);
   document.getElementById("cartTotal").textContent="$"+formatARS(total);
+
+  // Actualizar resumen flotante
+  const resumen=document.getElementById("cartSummary");
+  if(resumen){
+    if(items>0){
+      resumen.classList.add("visible");
+      resumen.querySelector(".summary-text").textContent=`${items} ítem${items>1?"s":""} – Total: $${formatARS(total)}`;
+    }else{
+      resumen.classList.remove("visible");
+    }
+  }
 }
 
-function refreshCart(){
-  const cont=document.getElementById("cartItems");
-  if(!cont) return;
-  cont.innerHTML="";
-  carrito.forEach(p=>{
-    const li=document.createElement("div");
-    li.className="cart-item";
-    li.innerHTML=`
-      <span>[${p.id}] ${p.nombre}</span>
+function refreshCart() {
+  const cont = document.getElementById("cartItems");
+  if (!cont) return;
+  cont.innerHTML = "";
+
+  carrito.forEach(p => {
+    const subtotal = p.precio * p.cantidad;
+    const li = document.createElement("div");
+    li.className = "cart-item";
+    li.innerHTML = `
+      <div class="cart-line">
+        <span class="cart-name">[${p.id}] ${p.nombre}</span>
+        <span class="cart-subtotal">$${formatARS(subtotal)}</span>
+      </div>
       <div class="qty-control">
         <button class="qty-btn" onclick="updateQty('${p.id}',-1)">-</button>
         <span>${p.cantidad}</span>
         <button class="qty-btn" onclick="updateQty('${p.id}',1)">+</button>
         <button class="del-btn" onclick="removeItem('${p.id}')">❌</button>
-      </div>`;
+      </div>
+    `;
     cont.appendChild(li);
   });
+
   refreshCartBadge();
 }
+
 
 function addToCart(id, nombre, precio, cantidad){
   const existente=carrito.find(p=>p.id===id);
   if(existente){ existente.cantidad+=cantidad; }
   else carrito.push({id,nombre,precio,cantidad});
   refreshCart();
-  toggleCart(true);
+  // Ya no abre el carrito automáticamente
 }
 
 function removeItem(id){
@@ -162,7 +184,8 @@ function goWhatsApp(){
   }
   const list=carrito.map(i=>`• [${i.id}] ${i.nombre} (x${i.cantidad}) - $${(i.precio*i.cantidad).toLocaleString("es-AR")}`).join("%0A");
   const total=carrito.reduce((a,b)=>a+b.precio*b.cantidad,0);
-  const msg=`Hola! Quiero hacer este pedido:%0A${list}%0A%0ATotal: $${total.toLocaleString('es-AR')}`;
+  const pagoSel=document.querySelector("input[name='pago']:checked")?.value || "Sin especificar";
+  const msg=`Hola! Quiero hacer este pedido:%0A${list}%0A%0ATotal: $${total.toLocaleString('es-AR')}%0AForma de pago: ${pagoSel}`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
 }
 
@@ -183,5 +206,36 @@ document.addEventListener("click",(e)=>{
 
 window.addEventListener("DOMContentLoaded",()=>{
   refreshCartBadge();
-  if(window.location.pathname.includes("productos.html")) cargarProductos();
+
+  // Cargar productos y activar buscador
+  if (document.querySelector(".products")) {
+    cargarProductos().then(() => buscarProductos());
+  }
+
+  // Crear resumen flotante
+  const resumen=document.createElement("div");
+  resumen.id="cartSummary";
+  resumen.innerHTML=`
+    <span class="summary-text"></span>
+    <button class="ver-btn" onclick="toggleCart(true)">Ver pedido</button>
+  `;
+  document.body.appendChild(resumen);
 });
+
+
+/* ================================
+   BÚSQUEDA DE PRODUCTOS
+=================================*/
+function buscarProductos() {
+  const input = document.getElementById("buscador");
+  if (!input) return;
+
+  input.addEventListener("input", (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    const filtrados = productos.filter(p =>
+      p.nombre.toLowerCase().includes(query) ||
+      p.id.toLowerCase().includes(query)
+    );
+    renderProductos(filtrados);
+  });
+}
