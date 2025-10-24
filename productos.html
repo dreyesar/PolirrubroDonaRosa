@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Productos – Polirubro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="logoBadge">
+        <img src="assets/logoDR.png" alt="Logo Polirubro Doña Rosa">
+        <div class="brand">
+          <h1>Polirubro Doña Rosa</h1>
+          <small>Tu mercado de barrio, ahora online</small>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html" class="cta">Productos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="productos">
+      <div class="container">
+        <h3>Catálogo de Productos</h3>
+        <div class="tools">
+          <input id="buscador" class="search" placeholder="Buscar producto..." />
+          <select id="filtroCategoria" class="filter">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+        <div class="products">
+          <!-- Se completa dinámicamente desde script.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© <span id="y"></span> Polirubro Doña Rosa. Todos los derechos reservados.</span>
+    <img src="assets/logoDR.png" alt="Logo Polirubro Doña Rosa">
+  </footer>
+
+  <!-- 🛒 Carrito flotante + panel lateral -->
+  <div class="floatCart" onclick="toggleCart(true)">
+    <span>🛍️ <b id="items">0</b> ítems • <b id="total">$0</b></span>
+  </div>
+
+  <div id="cartPanel" class="cart-panel">
+    <div class="cart-header">
+      <h3>🛒 Tu Pedido</h3>
+      <button class="closeCart" onclick="toggleCart(false)">✖️</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <b>Total:</b> <span id="cartTotal">$0</span>
+      </div>
+      <button class="go" onclick="goWhatsApp()">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

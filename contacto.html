@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - Polirubro Doña Rosa</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="img/logo.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html"><img src="img/logo.png" alt="Polirubro Doña Rosa" /></a>
+      </div>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero interior">
+      <div class="container hero-content">
+        <h1>Contacto</h1>
+        <p>Enviá tu consulta y te responderemos a la brevedad</p>
+      </div>
+    </section>
+
+    <section class="section contact">
+      <div class="container narrow">
+        <!-- Formulario con FormSubmit -->
+        <form 
+          action="https://formsubmit.co/dreyesar@gmail.com" 
+          method="POST"
+          class="contact-form"
+        >
+          <input type="text" name="nombre" placeholder="Tu nombre" required>
+          <input type="email" name="email" placeholder="Tu correo electrónico" required>
+          <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+
+          <!-- Configuraciones de FormSubmit -->
+          <input type="hidden" name="_next" value="http://localhost:8000/gracias.html"> 
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <button type="submit" class="btn enviar">Enviar mensaje</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Polirubro Doña Rosa | Todos los derechos reservados.</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://wa.me/5493496123456" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</body>
+</html>
