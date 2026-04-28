@@ -58,7 +58,8 @@ Ingeniero en Sistemas – *Orbit Solutions*
 ---
 
 ### 🧠 Tecnologías utilizadas
-- HTML5 / CSS3 / JavaScript
+- HTML5 / CSS3 / JavaScript  
+- PHP (opcional para backend local)  
 - FormSubmit (para envío de formularios)  
 - GitHub Pages (hosting público gratuito)
 

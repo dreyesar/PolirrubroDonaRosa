@@ -3,72 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto - Polirubro Doña Rosa</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="img/logo.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Contacto – Polirrubro Doña Rosa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logoDR.png" type="image/png" />
 </head>
 <body>
-  <header class="navbar">
-    <div class="container">
-      <div class="logo">
-        <a href="index.html"><img src="img/logo.png" alt="Polirubro Doña Rosa" /></a>
+  <header>
+    <div class="container topbar">
+      <div class="logoBadge">
+        <a href="index.html">
+          <img src="assets/logoDR.png" alt="Logo Doña Rosa">
+        </a>
+        <div class="brand">
+          <h1>Polirrubro Doña Rosa</h1>
+          <small>Tu mercado de barrio, ahora online</small>
+        </div>
       </div>
-      <nav class="nav-links">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="contacto.html" class="active">Contacto</a></li>
-        </ul>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html" class="active">Contacto</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero interior">
-      <div class="container hero-content">
-        <h1>Contacto</h1>
-        <p>Enviá tu consulta y te responderemos a la brevedad</p>
-      </div>
-    </section>
+    <section class="section">
+      <div class="container container-narrow">
+        <h3>Contacto</h3>
+        <p style="color:var(--sub);margin-bottom:8px;">Enviá tu consulta y te respondemos a la brevedad.</p>
 
-    <section class="section contact">
-      <div class="container narrow">
-        <!-- Formulario con FormSubmit -->
-        <form 
-          action="https://formsubmit.co/dreyesar@gmail.com" 
+        <form
+          action="https://formsubmit.co/dreyesar@gmail.com"
           method="POST"
           class="contact-form"
         >
           <input type="text" name="nombre" placeholder="Tu nombre" required>
           <input type="email" name="email" placeholder="Tu correo electrónico" required>
-          <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+          <textarea name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
 
-          <!-- Configuraciones de FormSubmit -->
-          <input type="hidden" name="_next" value="http://localhost:8000/gracias.html"> 
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_next" value="https://dreyesar.github.io/PolirrubroDonaRosa/gracias.html">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde el sitio web">
 
-          <button type="submit" class="btn enviar">Enviar mensaje</button>
+          <button type="submit" class="btn-enviar">Enviar mensaje</button>
         </form>
+
+        <div class="contact-info">
+          <p>📍 <b>Maipú 248, S2204 Timbúes, Santa Fe</b></p>
+          <p>📞 <b>03476 49-5451</b></p>
+          <p>🕓 <b>Horarios:</b><br>
+          Lunes a Sábado: 8:00 a 21:30 hs<br>
+          Domingo: 8:30 a 13:00 / 17:00 a 21:30 hs</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 Polirubro Doña Rosa | Todos los derechos reservados.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="assets/logoDR.png" alt="Logo Doña Rosa">
+      <span>© <span id="y"></span> Polirrubro Doña Rosa. Todos los derechos reservados.</span>
       <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/543476495451" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </footer>
 
-  <!-- Botón flotante de WhatsApp -->
-  <a href="https://wa.me/5493496123456" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/543476495451" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>

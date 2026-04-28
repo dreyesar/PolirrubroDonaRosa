@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Polirrubro Doña Rosa</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logoDR.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script defer src="script.js"></script>
 </head>
@@ -20,12 +22,12 @@
         </div>
       </div>
       <nav>
-        <a href="index.html">Inicio</a>
+        <a href="index.html" class="active">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="#ofertas">Ofertas</a>
         <a href="contacto.html">Contacto</a>
         <a class="cta" href="productos.html">Ver catálogo</a>
-      </nav>      
+      </nav>
     </div>
   </header>
 
@@ -39,7 +41,7 @@
           <div class="actions">
             <a class="btn primary" href="productos.html">Ver productos</a>
             <a class="btn alt" href="#ofertas">Ofertas de hoy</a>
-          </div>          
+          </div>
           <div class="stats">
             <span class="chip">⚡ Entrega rápida</span>
             <span class="chip">📍 Timbúes, Santa Fe</span>
@@ -51,7 +53,6 @@
             <div class="dot"></div>
             <div><b>Promo:</b> 3x2 en Galletitas seleccionadas • 10% off pagando con QR</div>
           </div>
-          
         </div>
       </div>
     </section>
@@ -83,32 +84,49 @@
     </section>
   </main>
 
-  <footer class="container">
-    <span>© <span id="y"></span> Polirrubro Doña Rosa. Todos los derechos reservados.</span>
-    <img src="assets/logoDR.png" alt="Logo Doña Rosa">
-  </footer>
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-
-  <!-- 🛒 Carrito flotante + panel lateral -->
-<div class="floatCart" onclick="toggleCart(true)">
-  <span>🛍️ <b id="items">0</b> ítems • <b id="total">$0</b></span>
-</div>
-
-<div id="cartPanel" class="cart-panel">
-  <div class="cart-header">
-    <h3>🛒 Tu Pedido</h3>
-    <button class="closeCart" onclick="toggleCart(false)">✖️</button>
-  </div>
-  <div id="cartItems" class="cart-items"></div>
-  <div class="cart-footer">
-    <div class="cart-total">
-      <b>Total:</b> <span id="cartTotal">$0</span>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="assets/logoDR.png" alt="Logo Doña Rosa">
+      <span>© <span id="y"></span> Polirrubro Doña Rosa. Todos los derechos reservados.</span>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/543476495451" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
     </div>
-    <button class="go" onclick="goWhatsApp()">Enviar por WhatsApp</button>
-  </div>
-</div>
+  </footer>
 
+  <!-- Carrito flotante -->
+  <div class="floatCart" onclick="toggleCart(true)">
+    <span>🛍️ <b id="items">0</b> ítems • <b id="total">$0</b></span>
+  </div>
+
+  <!-- Panel lateral carrito -->
+  <div id="cartPanel" class="cart-panel">
+    <div class="cart-header">
+      <h3>🛒 Tu Pedido</h3>
+      <button class="closeCart" onclick="toggleCart(false)">✖️</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-pago">
+      <h3>Forma de pago</h3>
+      <label><input type="radio" name="pago" value="Efectivo" checked> Efectivo</label>
+      <label><input type="radio" name="pago" value="Débito"> Débito</label>
+      <label><input type="radio" name="pago" value="Mercado Pago"> Mercado Pago</label>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <b>Total:</b> <span id="cartTotal">$0</span>
+      </div>
+      <button class="go" onclick="goWhatsApp()">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/543476495451" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>

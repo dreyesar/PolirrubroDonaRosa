@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gracias | Polirubro Doña Rosa</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Gracias! – Polirrubro Doña Rosa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="img/logo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/logoDR.png" type="image/png" />
 </head>
 <body>
-  <header class="navbar">
-    <div class="container">
-      <div class="logo">
-        <a href="index.html"><img src="img/logo.png" alt="Polirubro Doña Rosa"></a>
+  <header>
+    <div class="container topbar">
+      <div class="logoBadge">
+        <a href="index.html">
+          <img src="assets/logoDR.png" alt="Logo Doña Rosa">
+        </a>
+        <div class="brand">
+          <h1>Polirrubro Doña Rosa</h1>
+          <small>Tu mercado de barrio, ahora online</small>
+        </div>
       </div>
-      <nav class="nav-links">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero interior">
-      <div class="container hero-content">
-        <h1>¡Gracias por contactarte con nosotros!</h1>
-        <p>Tu mensaje fue enviado correctamente. Te responderemos a la brevedad.</p>
-
-        <div class="btn-container">
-          <a href="index.html" class="btn volver">Volver al inicio</a>
-          <a href="productos.html" class="btn productos">Ver productos</a>
+    <section class="section gracias-section">
+      <div class="container container-narrow" style="text-align:center;padding:60px 0;">
+        <div class="gracias-icon">✅</div>
+        <h2 class="gracias-titulo">¡Gracias por contactarte!</h2>
+        <p class="gracias-texto">Tu mensaje fue enviado correctamente.<br>Te respondemos a la brevedad.</p>
+        <div class="gracias-btns">
+          <a href="index.html" class="btn primary">Volver al inicio</a>
+          <a href="productos.html" class="btn alt">Ver productos</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 Polirubro Doña Rosa | Todos los derechos reservados.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img src="assets/logoDR.png" alt="Logo Doña Rosa">
+      <span>© <span id="y"></span> Polirrubro Doña Rosa. Todos los derechos reservados.</span>
       <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/543476495451" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </footer>
 
-  <!-- Botón flotante de WhatsApp -->
-  <a href="https://wa.me/5493496123456" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/543476495451" class="whatsapp-float" target="_blank" rel="noopener" title="Contactanos por WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
