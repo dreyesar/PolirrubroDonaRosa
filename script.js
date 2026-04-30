@@ -84,15 +84,21 @@ async function cargarProductos(){
 /* ================================
    IMAGEN AUTOMÁTICA POR CÓDIGO DE BARRAS
 =================================*/
-// Cache en memoria para no repetir pedidos en la misma sesión
 const imgCache = {};
 
 function getImageUrl(id) {
-  // Solo busca si parece un EAN/código de barras numérico de 8+ dígitos
-  if (/^\d{8,14}$/.test(id)) {
-    return `https://images.openfoodfacts.org/images/products/${id}/front_es.400.jpg`;
+  if (!/^\d{8,14}$/.test(id)) return null;
+
+  // Open Food Facts parte el EAN-13 en grupos: 779/006/002/3684
+  // EAN-8 va directo
+  let path;
+  if (id.length === 13) {
+    path = `${id.slice(0,3)}/${id.slice(3,6)}/${id.slice(6,9)}/${id.slice(9)}`;
+  } else {
+    path = id;
   }
-  return null;
+  // Intenta primero front en español, luego genérico
+  return `https://images.openfoodfacts.org/images/products/${path}/front_es.400.jpg`;
 }
 
 function setThumbImage(thumbEl, id, nombre) {
@@ -106,7 +112,17 @@ function setThumbImage(thumbEl, id, nombre) {
   img.loading = "lazy";
   img.style.cssText = "width:100%;height:100%;object-fit:cover";
   img.onload = () => { thumbEl.innerHTML = ""; thumbEl.appendChild(img); };
-  img.onerror = () => { thumbEl.innerHTML = `<span>${nombre.charAt(0)}</span>`; };
+  img.onerror = () => {
+    // Fallback: intentar sin idioma (front.400.jpg)
+    const urlFallback = url.replace("front_es.400.jpg", "front.400.jpg");
+    const img2 = document.createElement("img");
+    img2.alt = nombre;
+    img2.loading = "lazy";
+    img2.style.cssText = "width:100%;height:100%;object-fit:cover";
+    img2.onload = () => { thumbEl.innerHTML = ""; thumbEl.appendChild(img2); };
+    img2.onerror = () => { thumbEl.innerHTML = `<span>${nombre.charAt(0)}</span>`; };
+    img2.src = urlFallback;
+  };
   img.src = url;
 }
 
