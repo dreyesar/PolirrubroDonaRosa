@@ -82,6 +82,35 @@ async function cargarProductos(){
 }
 
 /* ================================
+   IMAGEN AUTOMÁTICA POR CÓDIGO DE BARRAS
+=================================*/
+// Cache en memoria para no repetir pedidos en la misma sesión
+const imgCache = {};
+
+function getImageUrl(id) {
+  // Solo busca si parece un EAN/código de barras numérico de 8+ dígitos
+  if (/^\d{8,14}$/.test(id)) {
+    return `https://images.openfoodfacts.org/images/products/${id}/front_es.400.jpg`;
+  }
+  return null;
+}
+
+function setThumbImage(thumbEl, id, nombre) {
+  const url = getImageUrl(id);
+  if (!url) {
+    thumbEl.innerHTML = `<span>${nombre.charAt(0)}</span>`;
+    return;
+  }
+  const img = document.createElement("img");
+  img.alt = nombre;
+  img.loading = "lazy";
+  img.style.cssText = "width:100%;height:100%;object-fit:cover";
+  img.onload = () => { thumbEl.innerHTML = ""; thumbEl.appendChild(img); };
+  img.onerror = () => { thumbEl.innerHTML = `<span>${nombre.charAt(0)}</span>`; };
+  img.src = url;
+}
+
+/* ================================
    RENDERIZAR CATÁLOGO
 =================================*/
 function renderProductos(lista){
@@ -93,13 +122,15 @@ function renderProductos(lista){
     return;
   }
   lista.forEach(p=>{
-    // Imagen: si tiene ruta en CSV la usa, sino placeholder
+    // Si tiene imagen manual en CSV la usa, sino intenta Open Food Facts
     const imgHTML = p.imagen
-      ? `<div class="thumb"><img src="assets/productos/${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='<span>Sin imagen</span>'"></div>`
-      : `<div class="thumb"><span>Sin imagen</span></div>`;
+      ? `<div class="thumb"><img src="assets/productos/${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='<span>${p.nombre.charAt(0)}</span>'"></div>`
+      : `<div class="thumb thumb-lazy"><span>${p.nombre.charAt(0)}</span></div>`;
 
     const card=document.createElement("article");
     card.className="card";
+    card.dataset.id=p.id;
+    card.dataset.nombre=p.nombre;
     card.innerHTML=`
       ${imgHTML}
       <div class="info">
@@ -117,7 +148,25 @@ function renderProductos(lista){
       </div>`;
     grid.appendChild(card);
   });
+
+  // Lazy load imágenes via IntersectionObserver — evita 855 pedidos simultáneos
+  if(!p_imagen_observer){
+    p_imagen_observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const thumb = entry.target.querySelector(".thumb-lazy");
+        if(thumb){
+          setThumbImage(thumb, entry.target.dataset.id, entry.target.dataset.nombre);
+          thumb.classList.remove("thumb-lazy");
+        }
+        p_imagen_observer.unobserve(entry.target);
+      });
+    },{rootMargin:"200px"});
+  }
+  grid.querySelectorAll(".card").forEach(c=>p_imagen_observer.observe(c));
 }
+
+let p_imagen_observer = null;
 
 /* ================================
    CANTIDADES
