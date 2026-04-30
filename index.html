@@ -14,14 +14,15 @@
 <body>
   <header>
     <div class="container topbar">
-      <div class="logoBadge">
+      <a href="index.html" class="logoBadge">
         <img src="assets/logoDR.png" alt="Logo Doña Rosa">
         <div class="brand">
           <h1>Polirrubro Doña Rosa</h1>
           <small>Tu mercado de barrio, ahora online</small>
         </div>
-      </div>
-      <nav>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Menú">☰</button>
+      <nav id="mainNav">
         <a href="index.html" class="active">Inicio</a>
         <a href="productos.html">Productos</a>
         <a href="#ofertas">Ofertas</a>

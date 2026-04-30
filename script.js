@@ -256,6 +256,22 @@ function updateQty(id,delta){
 }
 
 /* ================================
+   MENÚ MOBILE
+=================================*/
+function toggleNav(){
+  const nav=document.getElementById("mainNav");
+  if(!nav) return;
+  nav.classList.toggle("open");
+}
+
+// Cerrar menú al hacer clic en un link
+document.addEventListener("click",(e)=>{
+  if(e.target.closest("#mainNav a")){
+    document.getElementById("mainNav")?.classList.remove("open");
+  }
+});
+
+/* ================================
    PANEL LATERAL
 =================================*/
 function toggleCart(open){
