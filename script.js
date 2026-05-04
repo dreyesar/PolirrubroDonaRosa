@@ -305,7 +305,7 @@ function goWhatsApp(){
     alert("Agregá productos para enviar el pedido.");
     return;
   }
-  const list=carrito.map(i=>`• ${i.nombre} (x${i.cantidad}) - $${(i.precio*i.cantidad).toLocaleString("es-AR")}`).join("%0A");
+  const list=carrito.map(i=>`• [${i.id}] ${i.nombre} (x${i.cantidad}) - $${(i.precio*i.cantidad).toLocaleString("es-AR")}`).join("%0A");
   const total=carrito.reduce((a,b)=>a+b.precio*b.cantidad,0);
   const pagoSel=document.querySelector("input[name='pago']:checked")?.value||"Sin especificar";
   const msg=`Hola! Quiero hacer este pedido:%0A%0A${list}%0A%0A*Total: $${total.toLocaleString("es-AR")}*%0AForma de pago: ${pagoSel}`;
